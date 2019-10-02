@@ -66,7 +66,10 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String { return if  ((age%10 == 1)&&((age/10 !=1)&&(age/10 !=11))) "$age год" else if(((age%10 == 2)||(age%10 == 3)||(age%10 == 4))&&((age/10 !=1)&&(age/10 !=11))) "$age года" else "$age лет"
+fun ageDescription(age: Int): String = when {
+    ((age % 10 == 1) && ((age / 10 != 1) && (age / 10 != 11))) -> "$age год"
+    (((age % 10 == 2) || (age % 10 == 3) || (age % 10 == 4)) && ((age / 10 != 1) && (age / 10 != 11))) ->  "$age года"
+    else -> "$age лет"
 }
 /**
  * Простая
@@ -80,11 +83,13 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val s1 = t1*v1
-    val s2 = t2*v2
-    val s3 = t3*v3
-    val half = (s1+s2+s3)/2
-   return if (half<= s1) half/v1 else if((half>s1)&&(half<=s1+s2)) t1+(half-s1)/v2 else t1+t2+(half-s1-s2)/v3
+    val s1 = t1 * v1
+    val s2 = t2 * v2
+    val s3 = t3 * v3
+    val half = (s1 + s2 + s3) / 2
+   return if (half <= s1) half / v1
+   else if((half > s1) && (half <= s1 + s2)) t1 + (half - s1) / v2
+   else t1 + t2 + (half - s1 - s2) / v3
 
 }
 
@@ -137,12 +142,12 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val cosA = ((a*a + b*b - c*c)/2.0*b*a)*180.0/ PI
-    val cosB = ((b*b - a*a + c*c)/2.0*b*c)*180.0/ PI
-    val cosC = ((c*c + a*a - b*b)/2.0*a*c)*180.0/ PI
-    return if((a <=0.0)||(b<=0.0)||(c<=0.0)||(a>=b+c)||(b>=a+c)||(c>=a+b)) -1
-    else if((cosA == 0.0)||(cosB == 0.0)||(cosC == 0.0)) 1
+fun triangleKind(a: Double, b: Double, c: Double): Int  {
+    val cosA = ((a * a + b * b - c * c) / 2.0 * b * a) * 180.0 / PI
+    val cosB = ((b * b - a * a + c * c) / 2.0 * b * c) * 180.0 / PI
+    val cosC = ((c * c + a * a - b * b) / 2.0 * a * c) * 180.0 / PI
+    return if((a  <= 0.0) || (b <= 0.0) || (c <= 0.0) || (a >= b + c) || (b >= a + c) || (c >= a + b))  -1
+    else if((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1
     else if((cosA < 0.0)||(cosB < 0.0)||(cosC < 0.0)) 2
     else 0
 
