@@ -10,7 +10,7 @@ import kotlin.math.abs
  *
  * Лежит ли точка (x, y) внутри окружности с центром в (x0, y0) и радиусом r?
  */
-fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
+fun pointInsideCircle (x: Double, y: Double, x0: Double, y0: Double, r: Double) =
     sqr(x - x0) + sqr(y - y0) <= sqr(r)
 
 /**
