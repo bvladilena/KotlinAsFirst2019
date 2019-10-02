@@ -148,7 +148,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
     val cosC = ((c * c + a * a - b * b) / 2.0 * a * c) * 180.0 / PI
     return if((a  <= 0.0) || (b <= 0.0) || (c <= 0.0) || (a >= b + c) || (b >= a + c) || (c >= a + b))  -1
     else if((cosA == 0.0) || (cosB == 0.0) || (cosC == 0.0)) 1
-    else if((cosA < 0.0)||(cosB < 0.0)||(cosC < 0.0)) 2
+    else if((cosA < 0.0) || (cosB < 0.0) || (cosC < 0.0)) 2
     else 0
 
 
