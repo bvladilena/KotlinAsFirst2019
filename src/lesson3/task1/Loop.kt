@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 /**
@@ -67,7 +68,18 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var a = 0
+    var nu = abs (n)
+    if(nu > 0){
+        while (nu > 0){
+            nu /= 10
+            a += 1
+        }
+        return a
+    }
+    else return 1
+}
 
 /**
  * Простая
@@ -75,7 +87,22 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var a = 1
+    var b = 1
+    var c = 0
+    if(n <= 2) {
+        return 1
+    }
+        else
+            for (i in 3..n) {
+                c = a + b
+                a = b
+                b = c
+            }
+        return b
+
+}
 
 /**
  * Простая
@@ -83,14 +110,30 @@ fun fib(n: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var a = m
+    var b = n
+    var c = 0
+    while (b != 0){
+        c = b
+        b = a % b
+        a = c
+    }
+    return (m * n) / c
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var nu = n
+    var a = 2
+    while(nu % a != 0)
+        a += 1
+    return a
+}
 
 /**
  * Простая
