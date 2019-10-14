@@ -66,8 +66,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String = when {
-    age % 10 == 1 && age / 10 != 1 && age / 10 != 11 -> "$age год"
-    age % 10 in 2..4 && age / 10 != 1 && age / 10 != 11 -> "$age года"
+    age % 100 in 11..14 -> "$age лет"
+    age % 10 == 1 -> "$age год"
+    age % 10 in 2..4 -> "$age года"
     else -> "$age лет"
 }
 
@@ -107,11 +108,16 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int =
-     if ((kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2)) 3
-    else if (kingX == rookX1 || kingY == rookY1) 1
-    else if (kingX == rookX2 || kingY == rookY2) 2
-    else 0
+): Int {
+    val a = kingX == rookX1 || kingY == rookY1
+    val b = kingX == rookX2 || kingY == rookY2
+    return when {
+        a && b -> 3
+        a -> 1
+        b -> 2
+        else -> 0
+    }
+}
 
 /**
  * Простая
@@ -127,11 +133,16 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int =
-    if ((kingX == rookX || kingY == rookY) && abs(bishopX - kingX) == abs(bishopY - kingY)) 3
-    else if (kingX == rookX || kingY == rookY) 1
-    else if (abs(bishopX - kingX) == abs(bishopY - kingY)) 2
-    else 0
+): Int {
+    val a = kingX == rookX || kingY == rookY
+    val b = abs(bishopX - kingX) == abs(bishopY - kingY)
+    return when {
+        a && b -> 3
+        a -> 1
+        b -> 2
+        else -> 0
+    }
+}
 
 /**
  * Простая

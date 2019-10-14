@@ -122,6 +122,7 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
     val b = 3.0
     return initial * pow(a, b)
 }
+
 /**
  * Простая
  *
