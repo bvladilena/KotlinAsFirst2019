@@ -73,13 +73,13 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var a = 0
     var nu = abs(n)
-    if (nu > 0) {
+    return if (nu > 0) {
         while (nu > 0) {
             nu /= 10
             a += 1
         }
-        return a
-    } else return 1
+        a
+    } else 1
 }
 
 /**
@@ -128,9 +128,8 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var nu = n
     var a = 2
-    while (nu % a != 0)
+    while (n % a != 0)
         a += 1
     return a
 }
@@ -158,8 +157,8 @@ fun maxDivisor(n: Int): Int {
 fun isCoPrime(m: Int, n: Int): Boolean {
     var a = m
     var b = n
-    while(a > 0 && b > 0)
-        if(a >= b)
+    while (a > 0 && b > 0)
+        if (a >= b)
             a %= b
     else
             b %= a
@@ -201,8 +200,8 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
 fun collatzSteps(x: Int): Int {
     var a = 0
     var n = x
-    while(n != 1) {
-        if(n % 2 == 0) {
+    while (n != 1) {
+        if (n % 2 == 0) {
             a += 1
             n /= 2
         }
@@ -246,8 +245,8 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun revert(n: Int): Int {
     var nu = n
     var resultN = 0
-    var digit = digitNumber(nu)
-    while(nu != 0){
+    var digit = digitNumber(n)
+    while (nu != 0) {
         resultN *= 10
         digit = nu % 10
         nu /= 10
@@ -278,9 +277,9 @@ fun isPalindrome(n: Int): Boolean =
  */
 fun hasDifferentDigits(n: Int): Boolean {
     var nu = n
-    var digit = n % 10
-    while(nu != 0){
-        if(nu % 10 != digit)
+    val digit = n % 10
+    while (nu != 0) {
+        if (nu % 10 != digit)
             return true
         nu /= 10
     }
@@ -330,8 +329,7 @@ fun fibSequenceDigit(n: Int): Int {
     var f2 = 1
     if (n == 1 || n == 2)
         return 1
-    while (line <= n)
-    {
+    while (line <= n) {
         f = f1 + f2
         f1 = f2
         f2 = f
