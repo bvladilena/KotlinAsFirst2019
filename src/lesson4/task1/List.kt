@@ -274,7 +274,7 @@ fun convertToString(n: Int, base: Int): String = TODO()
 fun decimal(digits: List<Int>, base: Int): Int {
     var r = 0
     var cnt = 1
-    var lt = digits.reversed()
+    val lt = digits.reversed()
     for (i in lt) {
         r += i * cnt
         cnt *= base
