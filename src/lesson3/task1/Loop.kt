@@ -121,7 +121,7 @@ fun gcd(m: Int, n: Int):Int {
     }
     return c
 }
-fun lcm(m: Int, n: Int): Int = m / gcd(m, n) * n
+fun lcm (m: Int, n: Int): Int = m / gcd(m, n) * n
 
 /**
  * Простая

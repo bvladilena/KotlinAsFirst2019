@@ -256,7 +256,7 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String {
+fun convertToString(n: Int, base: Int): String{
     val rst = convert(n, base)
     val r = mutableListOf<Any>()
     for (nmb in rst) {
