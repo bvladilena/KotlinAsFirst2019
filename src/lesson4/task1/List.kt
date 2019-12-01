@@ -119,12 +119,9 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var result = 0.0
-    return if (v.isEmpty()) result
-    else {
-        for (i in v)
-            result += sqr(i)
-        sqrt(result)
-    }
+    for (i in v)
+        result += sqr(i)
+    return sqrt(result)
 }
 
 /**
@@ -147,12 +144,9 @@ fun mean(list: List<Double>): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    if (list.isEmpty()) 0.0
-    else {
-        val mean = list.sum() / list.size
-        for ((i) in list.withIndex())
-            list[i] = list[i] - mean
-    }
+        val m = mean(list)
+        for ((ind) in list.withIndex())
+            list[ind] = list[ind] - m
         return list
 }
 
@@ -183,7 +177,7 @@ fun polynom(p: List<Int>, x: Int): Int {
     var pln = 0
     for (cnt in p.indices)
         pln += (p[cnt] * x.toDouble().pow(cnt).toInt())
-        return pln
+    return pln
 }
 
 /**
@@ -210,17 +204,17 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  * Множители в списке должны располагаться по возрастанию.
  */
 fun factorize(n: Int): List<Int> {
-    val r = mutableListOf<Int>()
+    val l = mutableListOf<Int>()
     var cnt = 2
     var nmb = n
     while (nmb > 1) {
         if (nmb % cnt == 0) {
             nmb /= cnt
-            r.add(cnt)
+            l.add(cnt)
         } else
             cnt += 1
     }
-    return r
+    return l
 }
 
 /**
@@ -241,14 +235,14 @@ fun factorizeToString(n: Int): String =
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
-    val r = mutableListOf<Int>()
+    val l = mutableListOf<Int>()
     var nmb = n
     while (nmb != 0) {
-        r.add(nmb % base)
+        l.add(nmb % base)
         nmb /= base
     }
-    return if (r.isEmpty()) listOf(0)
-    else r.reversed()
+    return if (l.isEmpty()) listOf(0)
+    else l.reversed()
 }
 
 /**
@@ -262,7 +256,42 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val rst = convert(n, base)
+    val r = mutableListOf<Any>()
+    for (nmb in rst) {
+        when (nmb) {
+            in 0..9 -> r.add(nmb)
+            10 -> r.add("a")
+            11 -> r.add("b")
+            12 -> r.add("c")
+            13 -> r.add("d")
+            14 -> r.add("e")
+            15 -> r.add("f")
+            16 -> r.add("g")
+            17 -> r.add("h")
+            18 -> r.add("i")
+            19 -> r.add("j")
+            20 -> r.add("k")
+            21 -> r.add("l")
+            22 -> r.add("m")
+            23 -> r.add("n")
+            24 -> r.add("o")
+            25 -> r.add("p")
+            26 -> r.add("q")
+            27 -> r.add("r")
+            28 -> r.add("s")
+            29 -> r.add("t")
+            30 -> r.add("u")
+            31 -> r.add("v")
+            32 -> r.add("w")
+            33 -> r.add("x")
+            34 -> r.add("y")
+            35 -> r.add("z")
+        }
+    }
+    return r.joinToString ("")
+}
 
 /**
  * Средняя
@@ -295,6 +324,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * (например, str.toInt(base)), запрещается.
  */
 fun decimalFromString(str: String, base: Int): Int = TODO()
+
 
 /**
  * Сложная

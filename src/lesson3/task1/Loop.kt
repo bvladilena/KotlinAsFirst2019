@@ -91,11 +91,11 @@ fun digitNumber(n: Int): Int {
 fun fib(n: Int): Int {
     var a = 1
     var b = 1
-    var c: Number
     if (n <= 2) {
         return 1
-    } else
+    }
         for (i in 3..n) {
+            val c: Number
             c = a + b
             a = b
             b = c
@@ -110,7 +110,7 @@ fun fib(n: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {
+fun gcd(m: Int, n: Int):Int {
     var a = m
     var b = n
     var c = 0
@@ -119,8 +119,9 @@ fun lcm(m: Int, n: Int): Int {
         b = a % b
         a = c
     }
-    return (m * n) / c
+    return c
 }
+fun lcm(m: Int, n: Int): Int = m / gcd(m, n) * n
 
 /**
  * Простая
@@ -154,17 +155,7 @@ fun maxDivisor(n: Int): Int {
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean {
-    var a = m
-    var b = n
-    while (a > 0 && b > 0)
-        if (a >= b)
-            a %= b
-    else
-            b %= a
-    a += b
-    return a == 1
-}
+fun isCoPrime(m: Int, n: Int): Boolean = gcd(m, n) == 1
 
 /**
  * Простая
@@ -204,13 +195,13 @@ fun collatzSteps(x: Int): Int {
         if (n % 2 == 0) {
             a += 1
             n /= 2
-        }
-        else {
+        } else
+        {
             a += 1
             n = 3 * n + 1
         }
     }
-        return a
+    return a
 }
 
 /**
@@ -245,7 +236,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun revert(n: Int): Int {
     var nu = n
     var resultN = 0
-    var digit = digitNumber(n)
+    var digit = 0
     while (nu != 0) {
         resultN *= 10
         digit = nu % 10
