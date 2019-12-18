@@ -114,8 +114,8 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    for ((key) in a) {
-        if (a[key] != b[key] )
+    for ((key, value) in a) {
+        if (value != b[key])
             return false
     }
             return true
@@ -136,9 +136,9 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
  *     -> a changes to mutableMapOf() aka becomes empty
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
-    for ((key) in b)
-        if (a[key] == b[key])
-            a.remove(key)
+    for ((key, value) in b)
+        if (value == b[key])
+            a.remove(key, value)
     }
 
 /**
@@ -149,7 +149,7 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> =
-    a.toSet().intersect(b.toSet()).toMutableList()
+    a.intersect(b).toList()
 
 /**
  * Средняя
@@ -207,7 +207,17 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var nameStuff : String? = null
+    var priceMin = Double.MAX_VALUE
+    for ((name, pair) in stuff){
+        if ((pair.first == kind) && (pair.second <= priceMin)) {
+            nameStuff = name
+            priceMin = pair.second
+        }
+    }
+    return nameStuff
+}
 
 /**
  * Средняя

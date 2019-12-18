@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.lang.StringBuilder
 
 /**
  * Пример
@@ -70,8 +71,22 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val text = File(inputName).readText()
+    val writer = File(outputName).bufferedWriter()
+    var result = ' '
+    val letters = mapOf('ы' to 'и', 'Ы' to 'И', 'я' to 'а', 'Я' to 'А', 'ю' to 'у', 'Ю' to 'У')
+    writer.use {
+        for (ia in text) {
+            if ((result in "жЖчЧшШщЩ") && (ia in letters.keys)) {
+                it.write(letters[ia].toString())
+            } else {
+                it.write(ia.toString())
+            }
+            result = ia
+        }
+    }
 }
+
 
 /**
  * Средняя
@@ -428,5 +443,5 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     TODO()
-}
+ }
 

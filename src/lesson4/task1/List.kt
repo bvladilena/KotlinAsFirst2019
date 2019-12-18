@@ -207,6 +207,7 @@ fun factorize(n: Int): List<Int> {
     val l = mutableListOf<Int>()
     var cnt = 2
     var nmb = n
+    val sqrtA = sqrt(n.toDouble())
     while (nmb > 1) {
         if (nmb % cnt == 0) {
             nmb /= cnt
@@ -237,12 +238,12 @@ fun factorizeToString(n: Int): String =
 fun convert(n: Int, base: Int): List<Int> {
     val l = mutableListOf<Int>()
     var nmb = n
-    while (nmb != 0) {
+    while (nmb/base != 0) {
         l.add(nmb % base)
         nmb /= base
     }
-    return if (l.isEmpty()) listOf(0)
-    else l.reversed()
+    l.add(nmb)
+    return l.reversed()
 }
 
 /**
@@ -256,7 +257,7 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String{
+fun convertToString(n: Int, base: Int): String {
     val rst = convert(n, base)
     val r = mutableListOf<Any>()
     for (nmb in rst) {

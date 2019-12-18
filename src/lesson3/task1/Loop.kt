@@ -95,8 +95,7 @@ fun fib(n: Int): Int {
         return 1
     }
         for (i in 3..n) {
-            val c: Number
-            c = a + b
+            val c = a + b
             a = b
             b = c
         }
@@ -110,18 +109,18 @@ fun fib(n: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun gcd(m: Int, n: Int):Int {
+fun gcd(m: Int, n: Int): Int {
     var a = m
     var b = n
-    var c = 0
+
     while (b != 0) {
-        c = b
+        val c = b
         b = a % b
         a = c
     }
-    return c
+    return a
 }
-fun lcm (m: Int, n: Int): Int = m / gcd(m, n) * n
+fun lcm(m: Int, n: Int): Int = m / gcd(m, n) * n
 
 /**
  * Простая
@@ -129,10 +128,13 @@ fun lcm (m: Int, n: Int): Int = m / gcd(m, n) * n
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var a = 2
-    while (n % a != 0)
-        a += 1
-    return a
+    var result = 0
+    for (i in 2..n)
+        if (n % i == 0) {
+            result = i
+            break
+        }
+    return result
 }
 
 /**
@@ -195,8 +197,7 @@ fun collatzSteps(x: Int): Int {
         if (n % 2 == 0) {
             a += 1
             n /= 2
-        } else
-        {
+        } else {
             a += 1
             n = 3 * n + 1
         }
@@ -290,7 +291,7 @@ fun squareSequenceDigit(n: Int): Int {
     var nu = 0
     var digit: Int
     var line = 0
-    var sqrNu = 0
+    var sqrNu = sqr(nu)
     while (line < n) {
         nu += 1
         sqrNu = sqr(nu)
@@ -315,19 +316,18 @@ fun squareSequenceDigit(n: Int): Int {
 fun fibSequenceDigit(n: Int): Int {
     var digit: Int
     var line = 3
-    var f = 0
     var f1 = 1
     var f2 = 1
     if (n == 1 || n == 2)
         return 1
     while (line <= n) {
-        f = f1 + f2
+       val f = f1 + f2
         f1 = f2
         f2 = f
-        digit = digitNumber(f)
+        digit = digitNumber(f2)
         line += digit
     }
     line--
-    if (line - n == 0) return f % 10
-    return (f / (10.0.pow(abs(n - line))).toInt()) % 10
+    if (line - n == 0) return f2 % 10
+    return (f2 / (10.0.pow(abs(n - line))).toInt()) % 10
 }
