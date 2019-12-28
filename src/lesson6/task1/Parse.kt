@@ -73,39 +73,34 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
+val monthA = listOf(
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря"
+)
 fun dateStrToDigit(str: String): String {
     val data = str.split(" ")
-    val monthA = listOf(
-        "января",
-        "февраля",
-        "марта",
-        "апреля",
-        "мая",
-        "июня",
-        "июля",
-        "августа",
-        "сентября",
-        "октября",
-        "ноября",
-        "декабря"
-    )
     if (data.size != 3)
         return ""
-    try {
-        val day = data[0].toInt()
-        if (day !in 1..31)
-            return ""
-        val year = data[2].toInt()
-        if ((data[1] in monthA) && (day in 1..31)) {
+        val day = data[0].toIntOrNull()
+        val year = data[2].toIntOrNull()
+        if ((day != null) && (year != null) && (data[1] in monthA) && (day in 1..31)) {
             val month = monthA.indexOf(data[1]) + 1
             if (year < 0 || day > daysInMonth(month, year))
                 return ""
             return String.format("%02d.%02d.%d", day, month, year)
         }
         else return ""
-    } catch (e: NumberFormatException) {
-        return ""
-    }
+
 }
 
 /**
@@ -119,37 +114,18 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    val monthA = listOf(
-        "января",
-        "февраля",
-        "марта",
-        "апреля",
-        "мая",
-        "июня",
-        "июля",
-        "августа",
-        "сентября",
-        "октября",
-        "ноября",
-        "декабря"
-    )
     val data = digital.split(".")
-    try {
     if (data.size != 3)
         return ""
-        val day = data[0].toInt()
-        val year = data[2].toInt()
-        val month = data[1].toInt()
-        if ((day in 1..31) && (month in 1..12)) {
+        val day = data[0].toIntOrNull()
+        val year = data[2].toIntOrNull()
+        val month = data[1].toIntOrNull()
+        if ((day != null) && (year != null) && (month != null) && (day in 1..31) && (month in 1..12)) {
                 if ((year < 0) || (day > daysInMonth(month, year)))
                     return ""
                 return ("$day ${monthA[month - 1]} ${data[2]}")
             }
         else return ""
-    }
-    catch (e: NumberFormatException) {
-        return ""
-    }
 }
 
 /**
@@ -201,21 +177,15 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
+    val elements = listOf(' ','%','-')
     val str = jumps.split(" ")
     var max = -1
-    try {
+    if (jumps.all { !it.isDigit() } || jumps.any{ it !in elements && !it.isDigit() })
+        return max
         for (i in str) {
-            if (i == "%" || i == "-") continue
-            else {
-                val iA = i.toInt()
-                if (iA > max)
-                    max = iA
-            }
+            if (i.toIntOrNull() != null && i.toInt() > max)
+                max = i.toInt()
         }
-    }
-    catch (e: NumberFormatException) {
-        return -1
-    }
     return max
 }
 
@@ -233,11 +203,10 @@ fun bestLongJump(jumps: String): Int {
 fun bestHighJump(jumps: String): Int {
     val str = jumps.split(" ")
     var max = -1
-    val strA = str.size
-    for (i in 1 until strA step 2){
-        val plus = str[i-1].toInt()
+    for (i in 1 until str.size step 2){
+        val plus = str[i - 1].toIntOrNull()
         val plusA = str[i]
-        if (('+' in plusA) && (max < plus))
+        if ((plus != null) && ('+' in plusA) && (max < plus))
             max = plus
     }
     return max

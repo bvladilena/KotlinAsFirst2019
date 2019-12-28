@@ -145,7 +145,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
         val m = mean(list)
-        for ((ind) in list.withIndex())
+        for (ind in list.indices)
             list[ind] = list[ind] - m
         return list
 }
@@ -175,8 +175,11 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 fun polynom(p: List<Int>, x: Int): Int {
     var pln = 0
-    for (cnt in p.indices)
-        pln += (p[cnt] * x.toDouble().pow(cnt).toInt())
+    var count = 1
+    for (cnt in p) {
+        pln += cnt * count
+        count *= x
+    }
     return pln
 }
 
@@ -207,7 +210,6 @@ fun factorize(n: Int): List<Int> {
     val l = mutableListOf<Int>()
     var cnt = 2
     var nmb = n
-    val sqrtA = sqrt(n.toDouble())
     while (nmb > 1) {
         if (nmb % cnt == 0) {
             nmb /= cnt
@@ -238,7 +240,7 @@ fun factorizeToString(n: Int): String =
 fun convert(n: Int, base: Int): List<Int> {
     val l = mutableListOf<Int>()
     var nmb = n
-    while (nmb/base != 0) {
+    while (nmb / base != 0) {
         l.add(nmb % base)
         nmb /= base
     }
@@ -259,39 +261,14 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     val rst = convert(n, base)
-    val r = mutableListOf<Any>()
+    val r = mutableListOf<String>()
     for (nmb in rst) {
         when (nmb) {
-            in 0..9 -> r.add(nmb)
-            10 -> r.add("a")
-            11 -> r.add("b")
-            12 -> r.add("c")
-            13 -> r.add("d")
-            14 -> r.add("e")
-            15 -> r.add("f")
-            16 -> r.add("g")
-            17 -> r.add("h")
-            18 -> r.add("i")
-            19 -> r.add("j")
-            20 -> r.add("k")
-            21 -> r.add("l")
-            22 -> r.add("m")
-            23 -> r.add("n")
-            24 -> r.add("o")
-            25 -> r.add("p")
-            26 -> r.add("q")
-            27 -> r.add("r")
-            28 -> r.add("s")
-            29 -> r.add("t")
-            30 -> r.add("u")
-            31 -> r.add("v")
-            32 -> r.add("w")
-            33 -> r.add("x")
-            34 -> r.add("y")
-            35 -> r.add("z")
+            in 0..9 -> r.add(nmb.toString())
+            in 10..35 -> r.add(('a' + nmb - 10).toString())
         }
     }
-    return r.joinToString ("")
+    return r.joinToString("")
 }
 
 /**

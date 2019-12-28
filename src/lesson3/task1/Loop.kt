@@ -128,13 +128,16 @@ fun lcm(m: Int, n: Int): Int = m / gcd(m, n) * n
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var result = 0
-    for (i in 2..n)
-        if (n % i == 0) {
-            result = i
-            break
+    if (n % 2 == 0)
+        return 2
+    var t = 3
+    val sqrtN = sqrt(n * 1.0) + 1
+        while (t < sqrtN) {
+            if (n % t == 0)
+                return t
+                t += 2
         }
-    return result
+    return n
 }
 
 /**
@@ -142,13 +145,7 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int {
-    var a = n - 1
-    while (n % a != 0)
-        a -= 1
-    return a
-
-}
+fun maxDivisor(n: Int): Int = n / minDivisor(n)
 
 /**
  * Простая
@@ -291,7 +288,7 @@ fun squareSequenceDigit(n: Int): Int {
     var nu = 0
     var digit: Int
     var line = 0
-    var sqrNu = sqr(nu)
+    var sqrNu = 0
     while (line < n) {
         nu += 1
         sqrNu = sqr(nu)
